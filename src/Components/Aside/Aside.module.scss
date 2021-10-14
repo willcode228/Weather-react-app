@@ -1,0 +1,16 @@
+@import '../../Variables.scss';
+
+.aside{
+    width: 25%;
+    min-width: 310px;
+    min-height: 100%;
+    padding: 30px;
+
+    background: $aside-bg;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
