@@ -33,9 +33,14 @@ const getData = (Component) => {
             return () => cleanupFunction = true;
         }, []);
 
+        
+        if(!state) {
+            return null
+        }
+
         return (
-            <Component {...props} state={state}/>
-        )
+            <Component {...props} state={state} /> 
+        );
     }
 
     return ComponentContainer;

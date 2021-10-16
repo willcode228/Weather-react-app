@@ -7,8 +7,8 @@
 }
 
 .input{
+    width: 100%;
     border: none;
-    flex-grow: 1;
     padding: 10px;
     outline: none;
 }
@@ -46,6 +46,7 @@
 
 .inputWrapper{
     position: relative;
+    flex-grow: 1;
 }
 
 .placeholder{
