@@ -4,9 +4,12 @@ import { Context } from "../Context/Context"
 const consumer = (Component) => {
 
     const ConsumerContainer = (props) => {
-        const value = useContext(Context);
+        const state = useContext(Context);
 
-        return <Component {...props} value={value}/>
+        return <Component 
+                {...props} 
+                data={state.data} 
+                language={state.language}/>
     }
 
     return ConsumerContainer;

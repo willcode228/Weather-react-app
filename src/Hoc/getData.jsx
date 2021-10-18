@@ -7,7 +7,7 @@ const URL = process.env.REACT_APP_API_URL,
 const getData = (Component) => {
 
     const ComponentContainer = (props) => {
-        let [state, setState] = useState(null);
+        let [state, setState] = useState({language: 'ua'});
 
         useEffect(() => {
             let cleanupFunction = false;
@@ -19,22 +19,28 @@ const getData = (Component) => {
             }
         
             function success(pos){
-        
                 let lat = pos.coords.latitude,
                     lon = pos.coords.longitude;
         
                 axios
                     .get(`${URL}?lat=${lat}&lon=${lon}&units=metric&exclude=hourly,minutely&appid=${TOKEN}`)
-                    .then((response) => response.status === 200 && !cleanupFunction
-                                                                    ? setState(response.data) 
-                                                                    : state);
+                    .then((response) => {
+                        if(response.status === 200 && !cleanupFunction){
+                            setState(prevState => ({
+                                language: prevState.language,
+                                data: response.data,
+                            }));
+                        }else{
+                            return state
+                        }
+                    });
             }
 
             return () => cleanupFunction = true;
         }, []);
 
         
-        if(!state) {
+        if(!state.data) {
             return null
         }
 

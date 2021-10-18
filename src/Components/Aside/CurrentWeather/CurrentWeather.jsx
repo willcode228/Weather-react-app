@@ -1,6 +1,7 @@
 import styles from './CurrentWeather.module.scss';
 import { ReactComponent as CloudIcon } from '../../../assets/icons/cloud.svg';
 import {ReactComponent as HumidityIcon} from '../../../assets/icons/humidity.svg';
+import FormatDate from './Date/Date';
 
 const CurrentWeather = (props) => {
     const imgURL = process.env.REACT_APP_ICONS_URL;
@@ -17,9 +18,7 @@ const CurrentWeather = (props) => {
                 <sup className={styles.tempSup}>&#8451;</sup>
             </h1>
 
-            <p className={styles.date}>
-                {new Date().toLocaleDateString()}
-            </p>
+            <FormatDate language={props.language}/>
 
             <div className={styles.clouds}>
                 <CloudIcon className={styles.clouds__icon}/>

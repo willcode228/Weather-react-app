@@ -8,8 +8,8 @@ const Aside = (props) => {
 
     return (
         <div className={styles.aside}>
-            <Search />
-            <CurrentWeather data={props.value.current}/>
+            {/* <Search /> */}
+            <CurrentWeather data={props.data.current} language={props.language}/>
             <CurrentPlace />
         </div>
     )
