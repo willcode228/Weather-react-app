@@ -1,51 +1,81 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import getCoords from '../Utils/coords';
 
-const URL = process.env.REACT_APP_API_URL,
-    TOKEN = process.env.REACT_APP_API_KEY;
+const WEATHER_URL = process.env.REACT_APP_API_WEATHER_URL,
+    WEATHER_TOKEN = process.env.REACT_APP_API_WEATHER_KEY,
+
+    PLACE_URL = process.env.REACT_APP_API_PLACES_URL,
+    PLACE_KEY = process.env.REACT_APP_API_PLACES_KEY,
+
+    IPI_URL = process.env.REACT_APP_API_IPI_URL;
 
 const getData = (Component) => {
 
     const ComponentContainer = (props) => {
-        let [state, setState] = useState({language: 'ua'});
+
+        let [address, setAddress] = useState('');
+        let [language, setLanguage] = useState('en');
+        let [unit, setUnit] = useState('metric');
+
+        let [state, setState] = useState(null);
 
         useEffect(() => {
             let cleanupFunction = false;
-            navigator.geolocation.getCurrentPosition(success, error);
-    
-            function error(err) {
-                console.warn(`ERROR(${err.code}): ${err.message}`);
-                alert('Простите, но мы не можем определить ваше место нахождение');
-            }
-        
-            function success(pos){
-                let lat = pos.coords.latitude,
-                    lon = pos.coords.longitude;
-        
+
+            axios.get(IPI_URL)
+                .then(response => {
+                    if(response.status === 200 && !cleanupFunction) {
+                        return response.data.ip
+                    }
+                })
+                .then(ipi => {
+                    axios.get(`${PLACE_URL}${ipi}?access_key=${PLACE_KEY}&format=1`)
+                        .then(response => {
+                            if(response.status === 200 && !cleanupFunction) {
+                                setAddress(`${response.data.region_name}, ${response.data.country_name}`);
+                                setLanguage(response.data.location.languages[0].code);
+                            }
+                        });
+                });
+                
+            return () => cleanupFunction = true;
+        });
+
+        //weather situation data fetch
+        useEffect(() => {
+            let cleanupFunction = false;
+
+            const success = (lat, lon) => {
                 axios
-                    .get(`${URL}?lat=${lat}&lon=${lon}&units=metric&exclude=hourly,minutely&appid=${TOKEN}`)
+                    .get(`${WEATHER_URL}&lat=${lat}&lon=${lon}&units=${unit}&lang=${language}&appid=${WEATHER_TOKEN}`)
                     .then((response) => {
-                        if(response.status === 200 && !cleanupFunction){
-                            setState(prevState => ({
-                                language: prevState.language,
-                                data: response.data,
-                            }));
-                        }else{
+                        if (response.status === 200 && !cleanupFunction) {
+                            setState(response.data);
+                        } else {
                             return state
                         }
                     });
             }
 
-            return () => cleanupFunction = true;
-        }, []);
-
+            getCoords(success);
         
-        if(!state.data) {
+            return () => cleanupFunction = true;
+        }, [language, unit]);
+
+
+        if (!state) {
             return null
         }
 
         return (
-            <Component {...props} state={state} /> 
+            <Component {...props} 
+                        state={{
+                            state, 
+                            language,
+                            unit,
+                            address
+                        }} />
         );
     }
 

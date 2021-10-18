@@ -17,7 +17,7 @@ const FormatDate = ({language}) => {
 
         if(index === 0) return (
             <span className={styles.weekday} key={index}>
-                {date.slice(0,1).toUpperCase() + date.slice(1)},
+                {date.slice(0,1).toUpperCase() + date.slice(1)}
             </span>
         );
         

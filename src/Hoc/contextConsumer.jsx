@@ -8,8 +8,7 @@ const consumer = (Component) => {
 
         return <Component 
                 {...props} 
-                data={state.data} 
-                language={state.language}/>
+                state={state}/>
     }
 
     return ConsumerContainer;
