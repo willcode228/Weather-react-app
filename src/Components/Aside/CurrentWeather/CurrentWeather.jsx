@@ -4,38 +4,38 @@ import {ReactComponent as HumidityIcon} from '../../../assets/icons/humidity.svg
 import FormatDate from './Date/Date';
 import Address from './Address/Address';
 
-const CurrentWeather = (props) => {
+const CurrentWeather = ({state, language, address, unit}) => {
     const imgURL = process.env.REACT_APP_ICONS_URL;
 
     return (
         <div className={styles.currentWeather}>
 
             <img className={styles.currentWeather__img} 
-                src={`${imgURL}${props.state.weather[0].icon}@4x.png`} 
+                src={`${imgURL}${state.weather[0].icon}@4x.png`} 
                 alt="weather situation icon" />
 
             <h1 className={styles.temp}>
-                {Math.round(props.state.feels_like)}
-                <sup className={styles.tempSup}>&#8451;</sup>
+                {Math.round(state.feels_like)}
+                <sup className={styles.tempSup}>{unit}</sup>
             </h1>
 
-            <FormatDate language={props.language}/>
+            <FormatDate language={language}/>
 
             <div className={styles.clouds}>
                 <CloudIcon className={styles.clouds__icon}/>
                 <p className={styles.clouds__description}>
-                    {props.state.weather[0].description}
+                    {state.weather[0].description}
                 </p>
             </div>
 
             <div className={styles.humidity}>
                 <HumidityIcon className={styles.humidity__icon}/>
                 <p className={styles.humidity__percent}>
-                    {props.state.humidity}%
+                    {state.humidity}%
                 </p>
             </div>
 
-            <Address address={props.address} />
+            <Address address={address} />
 
         </div>
     );

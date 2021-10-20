@@ -74,8 +74,10 @@ const getData = (Component) => {
                             state, 
                             language,
                             unit,
-                            address
-                        }} />
+                            address,
+                            setLanguage,
+                            setUnit
+                        }}/>
         );
     }
 

@@ -1,0 +1,42 @@
+@import '../../../../Variables.scss';
+
+.day{
+    padding: 10px;
+    flex-grow: 1;
+    min-height: 150px;
+    border-radius: 20px;
+    background: $white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    &__date{
+        font-weight: 500;
+        &::first-letter{
+            text-transform: uppercase;
+        }
+    }
+    &__img{
+        height: 50px;
+        img{
+            width: 50px;
+        }
+    }
+
+    &__temp{
+        display: flex;
+        justify-content: center;
+        &_max,
+        &_min{
+            font-weight: 400;
+        }
+        &_max{
+            margin-right: 10px;
+        }
+        &_min{
+            color: $grey;
+        }
+    }
+}
