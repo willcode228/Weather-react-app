@@ -1,4 +1,5 @@
 import consumer from '../../../Hoc/contextConsumer';
+import Language from './Language/Language';
 import styles from './Navbar.module.scss';
 import Unit from './Unit/Unit';
 
@@ -11,9 +12,7 @@ const Navbar = ({state}) => {
 
             <Unit unit={state.unit} setUnit={state.setUnit}/>
 
-            <div className={styles.language}>
-                Language
-            </div>
+            <Language language={state.language} setLanguage={state.setLanguage}/>
         </nav>  
     );
 }

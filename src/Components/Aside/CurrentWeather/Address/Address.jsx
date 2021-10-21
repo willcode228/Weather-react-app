@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
 import styles from './Address.module.scss'
+import city from '../../../../assets/icons/city-bg.svg';
 
 const Address = ({address}) => {
 
@@ -22,7 +23,11 @@ const Address = ({address}) => {
 
     return (
         <div className={styles.address}>
-            <img src={img} alt="city" />
+
+            {
+                !img ? <img src={city} alt='city' /> 
+                    : <img src={img} alt="city" />
+            }
 
             <div className={styles.titleWrapper}>
                 <h1 className={styles.title}>{address}</h1>

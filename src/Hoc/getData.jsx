@@ -40,7 +40,7 @@ const getData = (Component) => {
                 });
                 
             return () => cleanupFunction = true;
-        });
+        }, []);
 
         //weather situation data fetch
         useEffect(() => {
