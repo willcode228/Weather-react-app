@@ -2,9 +2,9 @@ import styles from './CurrentWeather.module.scss';
 import { ReactComponent as CloudIcon } from '../../../assets/icons/cloud.svg';
 import {ReactComponent as HumidityIcon} from '../../../assets/icons/humidity.svg';
 import FormatDate from './Date/Date';
-import Address from './Address/Address';
+import unit from '../../../Hoc/unit';
 
-const CurrentWeather = ({state, language, address, unit}) => {
+const CurrentWeather = ({state, language, unit}) => {
     const imgURL = process.env.REACT_APP_ICONS_URL;
 
     return (
@@ -35,10 +35,8 @@ const CurrentWeather = ({state, language, address, unit}) => {
                 </p>
             </div>
 
-            <Address address={address} />
-
         </div>
     );
 }
 
-export default CurrentWeather;
+export default unit(CurrentWeather);

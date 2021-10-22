@@ -15,11 +15,4 @@
         flex-wrap: wrap;
         gap: 20px;
     }
-
-    &__card{
-        flex: 1 0 30%;
-        min-height: 235px;
-        background: $white;
-        border-radius: 20px;
-    }
 }

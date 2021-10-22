@@ -1,8 +1,8 @@
 import styles from './Weekday.module.scss';
 import Day from './Day/Day';
+import unit from '../../../Hoc/unit';
 
 const Weekday = ({state, language, unit}) => {
-
     return (
         <div className={styles.daily}>
             {
@@ -14,4 +14,4 @@ const Weekday = ({state, language, unit}) => {
     );
 }
 
-export default Weekday;
+export default unit(Weekday);
