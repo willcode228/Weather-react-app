@@ -1,0 +1,15 @@
+.highlight__box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &_line{
+        &:first-child{
+            margin-bottom: 15px;
+        }
+        display: flex;
+        align-items: center;
+        img{
+            margin-right: 20px;
+        }
+    }
+}

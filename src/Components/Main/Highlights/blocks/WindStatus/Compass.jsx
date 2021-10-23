@@ -1,8 +1,8 @@
 const Compass = ({ deg }) => {
-    console.log(deg);
     const arrowStyles = {
         transformOrigin: 'center',
         transform: `rotate(${deg}deg)`,
+        fill: 'rgb(208, 94, 93)'
     }
 
     return (

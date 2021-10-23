@@ -11,3 +11,11 @@
     border-top-left-radius: 28px;
     border-bottom-left-radius: 28px;
 }
+
+@media screen and (max-width: 768px) {
+    .aside{
+        min-width: 100%;
+        max-width: 100%;
+        border-radius: 28px;
+    }
+}

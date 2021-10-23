@@ -8,6 +8,8 @@ const unit = (Component) => {
                         unit={props.unit === 'imperial' ? fahrenheit : celsius}/>
     }
 
+    UnitContainer.displayName = `UnitContainer(${Component.displayName || Component.name || 'Component'})`;
+
     return UnitContainer;
 }
 export default unit;

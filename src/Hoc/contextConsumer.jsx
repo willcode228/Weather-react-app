@@ -11,6 +11,8 @@ const consumer = (Component) => {
                 state={state}/>
     }
 
+    ConsumerContainer.displayName = `ConsumerContainer(${Component.displayName || Component.name || 'Component'})`;
+
     return ConsumerContainer;
 }
 

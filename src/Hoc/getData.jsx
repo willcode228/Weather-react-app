@@ -12,7 +12,7 @@ const WEATHER_URL = process.env.REACT_APP_API_WEATHER_URL,
 
 const getData = (Component) => {
 
-    const ComponentContainer = (props) => {
+    const DataContainer = (props) => {
 
         let [address, setAddress] = useState('');
         let [language, setLanguage] = useState('en');
@@ -81,7 +81,10 @@ const getData = (Component) => {
         );
     }
 
-    return ComponentContainer;
+    DataContainer.displayName = `DataContainer(${Component.displayName || Component.name || 'Component'})`;
+
+
+    return DataContainer;
 }
 
 export default getData;

@@ -48,3 +48,13 @@
         fill: $grey;
     }
 }
+
+
+@media screen and (max-width: 768px) {
+    .currentWeather{
+        &__img{
+            width: 250px;
+        }
+        align-items: center;
+    }
+}
