@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Loading from '../Components/Loading/Loading';
 import getCoords from '../Utils/coords';
 
 const WEATHER_URL = process.env.REACT_APP_API_WEATHER_URL,
@@ -65,7 +66,7 @@ const getData = (Component) => {
 
 
         if (!state) {
-            return null
+            return <Loading />
         }
 
         return (
