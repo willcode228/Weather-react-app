@@ -5,6 +5,7 @@ const UnitBtn = ({unit, unitName, setUnit}) => {
     let status = unitName.staticName === unitName.serverName;
 
     const handleClick = () => {
+        localStorage.setItem('unit', unitName.staticName);
         setUnit(unitName.staticName);
     }
 

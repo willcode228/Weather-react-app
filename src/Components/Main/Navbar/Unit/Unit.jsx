@@ -7,6 +7,7 @@ const fahrenheit = process.env.REACT_APP_FAHRENHEIT,
 const Unit = ({unit, setUnit}) => {
     return (
         <div className={styles.unit}>
+
             <UnitBtn unit={celsius} unitName={{
                 staticName: 'metric',
                 serverName: unit
@@ -16,6 +17,7 @@ const Unit = ({unit, setUnit}) => {
                 staticName: 'imperial',
                 serverName: unit
             }} setUnit={setUnit}/>
+            
         </div>
     )
 }

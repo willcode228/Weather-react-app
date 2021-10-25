@@ -3,11 +3,18 @@ import styles from './SunStatus.module.scss';
 import sunriseIcon from '../../../../../assets/icons/sunrise.png'
 import sunsetIcon from '../../../../../assets/icons/sunset.png'
 
+import { useTranslation } from 'react-i18next';
+import '../../../../../Utils/i18next';
+
 
 const SunStatus = ({sunrise, sunset, language}) => {
+    const { t } = useTranslation();
+
     return (
         <div className={main.highlight}>
-            <h2 className={main.highlight__title}>Sunrise & Sunset</h2>
+            <h2 className={main.highlight__title}>
+                {t('highlights.sun-status.title')}
+            </h2>
             
             <div className={styles.highlight__box}>
 

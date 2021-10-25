@@ -8,7 +8,7 @@ const Aside = ({state}) => {
     return (
         <div className={styles.aside}>
             {/* <Search /> */}
-            <CurrentWeather state={state.state.current} 
+            <CurrentWeather state={state.data.current} 
                             language={state.language} 
                             unit={state.unit}/>
                             

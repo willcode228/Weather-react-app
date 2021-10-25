@@ -1,0 +1,22 @@
+{
+    "highlights": {
+        "title": "Сьогоднішні результати",
+        "wind-status": {
+            "title": "Вітер",
+            "unit": {
+                "imperial": "км/ч",
+                "metric": "м/с"
+            }
+        },
+        "sun-status": {
+            "title": "Схід і захід"
+        },
+        "pressure-status": {
+            "title": "Тиск",
+            "unhealthy": "Шкідливий",
+            "average": "Середній",
+            "normal": "Хороший",
+            "good": "Чудовий" 
+        }
+    }
+}

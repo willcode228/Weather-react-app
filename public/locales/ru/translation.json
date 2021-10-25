@@ -1,0 +1,22 @@
+{
+    "highlights": {
+        "title": "Сегодняшние результаты",
+        "wind-status": {
+            "title": "Ветер",
+            "unit": {
+                "imperial": "км/ч",
+                "metric": "м/с"
+            }
+        },
+        "sun-status": {
+            "title": "Восход и заход"
+        },
+        "pressure-status": {
+            "title": "Давление",
+            "unhealthy": "Вредное",
+            "average": "Среднее",
+            "normal": "Нормальное",
+            "good": "Отличное" 
+        }
+    }
+}

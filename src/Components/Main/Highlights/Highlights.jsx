@@ -3,10 +3,19 @@ import WindStatus from './blocks/WindStatus/WindStatus';
 import SunStatus from './blocks/SunStatus/SunStatus';
 import styles from './Highlights.module.scss';
 
+import { useTranslation } from 'react-i18next';
+import '../../../Utils/i18next';
+
 const Highlights = ({state, unit}) => {
+
+    const { t } = useTranslation();
+
     return (
         <div className={styles.highlights}>
-            <h2 className={styles.highlights__title}>Today's Highlights</h2>
+
+            <h2 className={styles.highlights__title}>
+                {t('highlights.title')}
+            </h2>
 
             <div className={styles.highlights__box}>
 

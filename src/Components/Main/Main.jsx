@@ -7,13 +7,13 @@ import Highlights from './Highlights/Highlights';
 const Main = ({state}) => {
     return (
         <div className={styles.main}>
-            <Navbar />
+            <Navbar state={state}/>
 
-            <Weekday state={state.state.daily}
+            <Weekday state={state.data.daily}
                     language={state.language}
                     unit={state.unit}/>
 
-            <Highlights state={state.state.daily.slice(0,1)[0]}
+            <Highlights state={state.data.daily.slice(0,1)[0]}
                         unit={state.unit}/>
         </div>
     );

@@ -15,7 +15,8 @@ const CurrentPlace = ({address}) => {
         axios.get(`${PHOTO_URL}?key=${PHOTO_KEY}&q=${address.split(',')[0]}&per_page=3`)
         .then(response => {
             if(response.status === 200) {
-                setImg(response.data.hits[0].largeImageURL);
+                //random sort of array to put random img in html
+                setImg(response.data.hits.sort(() => 0.5 - Math.random())[0].largeImageURL);
             }
         });
     })

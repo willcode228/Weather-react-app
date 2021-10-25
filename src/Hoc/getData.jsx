@@ -5,11 +5,7 @@ import getCoords from '../Utils/coords';
 
 const WEATHER_URL = process.env.REACT_APP_API_WEATHER_URL,
     WEATHER_TOKEN = process.env.REACT_APP_API_WEATHER_KEY,
-
-    PLACE_URL = process.env.REACT_APP_API_PLACES_URL,
-    PLACE_KEY = process.env.REACT_APP_API_PLACES_KEY,
-
-    IPI_URL = process.env.REACT_APP_API_IPI_URL;
+    PLACE_URL = process.env.REACT_APP_API_PLACES_URL;
 
 const getData = (Component) => {
 
@@ -19,66 +15,78 @@ const getData = (Component) => {
         let [language, setLanguage] = useState('en');
         let [unit, setUnit] = useState('metric');
 
-        let [state, setState] = useState(null);
+        let [data, setData] = useState(null);
 
+
+        //fetching from localStorage unit and language data
         useEffect(() => {
             let cleanupFunction = false;
 
-            axios.get(IPI_URL)
-                .then(response => {
-                    if(response.status === 200 && !cleanupFunction) {
-                        return response.data.ip
-                    }
-                })
-                .then(ipi => {
-                    axios.get(`${PLACE_URL}${ipi}?access_key=${PLACE_KEY}&format=1`)
-                        .then(response => {
-                            if(response.status === 200 && !cleanupFunction) {
-                                setAddress(`${response.data.region_name}, ${response.data.country_name}`);
-                                setLanguage(response.data.location.languages[0].code);
-                            }
-                        });
-                });
-                
+            const languageStorage = localStorage.getItem('i18nextLng');
+            if(!cleanupFunction && languageStorage) {
+                setLanguage(languageStorage);
+            }
+
+            const unitStorage = localStorage.getItem('unit');
+            if(!cleanupFunction && unitStorage) {
+                setUnit(unitStorage);
+            }
+
             return () => cleanupFunction = true;
-        }, []);
+        });
 
-        //weather situation data fetch
+        //fetching from api weather data
         useEffect(() => {
             let cleanupFunction = false;
 
-            const success = (lat, lon) => {
+            const weatherData = (lat, lon) => {
                 axios
                     .get(`${WEATHER_URL}&lat=${lat}&lon=${lon}&units=${unit}&lang=${language}&appid=${WEATHER_TOKEN}`)
                     .then((response) => {
                         if (response.status === 200 && !cleanupFunction) {
-                            setState(response.data);
+                            setData(response.data);
                         } else {
-                            return state
+                            return data
                         }
                     });
             }
 
-            getCoords(success);
+            const addressData = (lat, lon) => {
+                axios
+                    .get(`${PLACE_URL}&lat=${lat}&lon=${lon}&accept-language=${language}`)
+                    .then(response => {
+                        if (response.status === 200 && !cleanupFunction) {
+                            setAddress(`${response.data.address.city || response.data.address.village}, 
+                                            ${response.data.address.country}`)
+                        } else {
+                            return address;
+                        }
+                    });
+            }
+
+            getCoords(weatherData);
+            getCoords(addressData);
         
             return () => cleanupFunction = true;
         }, [language, unit]);
 
 
-        if (!state) {
+        if (!data) {
             return <Loading />
         }
 
         return (
             <Component {...props} 
-                        state={{
-                            state, 
-                            language,
-                            unit,
-                            address,
-                            setLanguage,
-                            setUnit
-                        }}/>
+                        state={
+                            {
+                                data, 
+                                language,
+                                unit,
+                                address,
+                                setLanguage,
+                                setUnit
+                            }
+                        }/>
         );
     }
 

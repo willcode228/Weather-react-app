@@ -1,0 +1,22 @@
+{
+    "highlights": {
+        "title": "Today's Highlights",
+        "wind-status": {
+            "title": "Wind Status",
+            "unit": {
+                "imperial": "km/h",
+                "metric": "m/s"
+            }
+        },
+        "sun-status": {
+            "title": "Sunrise & Sunset"
+        },
+        "pressure-status": {
+            "title": "Pressure",
+            "unhealthy": "Unhealthy",
+            "average": "Average",
+            "normal": "Normal",
+            "good": "Good" 
+        }
+    }
+}

@@ -1,13 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import styles from './Language.module.scss';
 
 const Language = ({language, setLanguage}) => {
 
+    const { t, i18n } = useTranslation();
     const [value, setValue] = useState(language);
 
     const handleChange = (e) => {
         setValue(e.target.value);
         setLanguage(e.target.value);
+        i18n.changeLanguage(e.target.value);
     }
 
     return (
@@ -15,20 +18,10 @@ const Language = ({language, setLanguage}) => {
                 value={value} 
                 onChange={handleChange}>
 
-            <option value={language}>{language}</option>
-
-            {
-                language !== 'uk' 
-                    ? <option value='uk'>uk</option>
-                    : null
-            }
-
-            {
-                language !== 'en' 
-                    ? <option value='en'>en</option>
-                    : null
-            }
-
+            <option value='en'>en</option>
+            <option value='uk'>uk</option>
+            <option value='ru'>ru</option>
+            
         </select>
     );
 }
