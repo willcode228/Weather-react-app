@@ -1,9 +1,9 @@
-import main from '../Highlight.module.scss';
 import Compass from './Compass';
-import styles from './WindStatus.module.scss';
-
-import { useTranslation } from 'react-i18next';
 import '../../../../../Utils/i18next';
+import main from '../Highlight.module.scss';
+import styles from './WindStatus.module.scss';
+import { useTranslation } from 'react-i18next';
+
 
 const WindStatus = ({deg, speed, unit}) => {
     const { t } = useTranslation();

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Date.module.scss';
 
 const FormatDate = ({language}) => {
@@ -6,7 +7,7 @@ const FormatDate = ({language}) => {
         weekday: 'long',
         hour: '2-digit',
         minute: '2-digit'
-    }
+    };
 
     const formatDate = new Date()
                         .toLocaleDateString(language, formatDateOptions)
@@ -31,6 +32,10 @@ const FormatDate = ({language}) => {
     return (
         <p className={styles.date}>{formatDatElements}</p>
     )
+}
+
+FormatDate.propTypes = {
+    language: PropTypes.string
 }
 
 export default FormatDate;

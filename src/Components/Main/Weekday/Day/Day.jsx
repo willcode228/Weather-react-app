@@ -1,7 +1,6 @@
 import WeekDate from './Date';
 import styles from './Day.module.scss';
 
-
 let ICON_URL = process.env.REACT_APP_ICONS_URL;
 
 const Day = ({day, language, unit}) => {
@@ -13,7 +12,7 @@ const Day = ({day, language, unit}) => {
             </h2>
 
             <div className={styles.day__img}>
-                <img src={`${ICON_URL}${day.weather[0].icon}@4x.png`} alt="icon"/>
+                <img src={`${ICON_URL}${day.weather[0].icon}@4x.png`} alt='icon'/>
             </div>
 
             <div className={styles.day__temp}>

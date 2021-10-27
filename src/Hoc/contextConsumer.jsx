@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { Context } from "../Context/Context"
+import { useContext } from 'react';
+import { Context } from '../Context/Context';
 
 const consumer = (Component) => {
 

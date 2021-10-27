@@ -1,10 +1,10 @@
-import PressureStatus from './blocks/PressureStatus/PressureStatus';
-import WindStatus from './blocks/WindStatus/WindStatus';
-import SunStatus from './blocks/SunStatus/SunStatus';
-import styles from './Highlights.module.scss';
-
-import { useTranslation } from 'react-i18next';
 import '../../../Utils/i18next';
+import styles from './Highlights.module.scss';
+import { useTranslation } from 'react-i18next';
+import SunStatus from './blocks/SunStatus/SunStatus';
+import WindStatus from './blocks/WindStatus/WindStatus';
+import PressureStatus from './blocks/PressureStatus/PressureStatus';
+
 
 const Highlights = ({state, unit}) => {
 

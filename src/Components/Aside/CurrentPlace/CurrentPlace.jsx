@@ -1,24 +1,30 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import styles from './CurrentPlace.module.scss';
-import city from '../../../assets/icons/city-bg.svg';
+import city from '../../../Assets/icons/city-bg.svg';
+
 
 const CurrentPlace = ({address}) => {
 
     let PHOTO_URL = process.env.REACT_APP_API_PHOTO_URL,
         PHOTO_KEY = process.env.REACT_APP_API_PHOTO_KEY;
 
-
     let [img, setImg] = useState(null);
 
     useEffect(() => {
-        axios.get(`${PHOTO_URL}?key=${PHOTO_KEY}&q=${address.split(',')[0]}&per_page=3`)
+        let cleanupFunction = false;
+        const mainAddressName = address ? address.city || address.village : '';
+
+        axios.get(`${PHOTO_URL}?key=${PHOTO_KEY}&q=${mainAddressName}&per_page=3`)
         .then(response => {
-            if(response.status === 200) {
+            if(response.status === 200 && !cleanupFunction && mainAddressName) {
                 setImg(response.data.hits[0].largeImageURL);
             }
         });
-    })
+
+        return () => cleanupFunction = true;
+    });
 
     return (
         <div className={styles.address}>
@@ -29,10 +35,21 @@ const CurrentPlace = ({address}) => {
             }
 
             <div className={styles.titleWrapper}>
-                <h1 className={styles.title}>{address}</h1>
+                <h1 className={styles.title}>
+                    { 
+                        address
+                            ? `${address.city || address.village}, ${address.country}`
+                            : ''
+                    }
+                </h1>
             </div>
+            
         </div>
     )
+}
+
+CurrentPlace.propTypes = {
+    address: PropTypes.object
 }
 
 export default CurrentPlace;

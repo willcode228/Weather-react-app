@@ -1,7 +1,7 @@
-import consumer from '../../Hoc/contextConsumer';
 import styles from './Aside.module.scss';
-import CurrentWeather from './CurrentWeather/CurrentWeather';
+import consumer from '../../Hoc/contextConsumer';
 import CurrentPlace from './CurrentPlace/CurrentPlace';
+import CurrentWeather from './CurrentWeather/CurrentWeather';
 
 const Aside = ({state}) => {
     return (

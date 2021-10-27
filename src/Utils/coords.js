@@ -1,28 +1,22 @@
-const geoObj = navigator.geolocation;
-const geoOptions = {
-    maximumAge: 5 * 60 * 1000,
-    timeout: 10 * 1000
-}
+const getCoords = (callback) => {
+    const geoObj = navigator.geolocation;
+    const geoOptions = {
+        maximumAge: 5 * 60 * 1000,
+        timeout: 10 * 1000
+    };
 
-const getPosition = () => {
-    return new Promise((resolve, reject) => 
-        geoObj.getCurrentPosition(resolve, reject, geoOptions)
-    );
-}
+    const success = (pos) => {
+        let lon = pos.coords.longitude,
+            lat = pos.coords.latitude;
 
-const getCoords = () => {
-    return getPosition()
-                .then(pos => ({
-                    lat: pos.coords.latitude,
-                    lon: pos.coords.longitude,
-                    error: false,
-                    errorType: null
-                }))
-                .catch(err => ({
-                    error: true,
-                    errorType: err
-                }));
+        callback(lon, lat, false);
+    }
 
+    const error = () => {
+        callback(0, 0, true);
+    }
+
+    geoObj ? geoObj.getCurrentPosition(success, error, geoOptions) : error();
 }
 
 export default getCoords;

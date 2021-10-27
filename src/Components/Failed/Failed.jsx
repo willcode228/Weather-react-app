@@ -1,10 +1,16 @@
+import '../../Utils/i18next';
+import oops from '../../Assets/oops.png';
 import styles from './Failed.module.scss';
-import oops from '../../assets/oops.png';
+import { useTranslation } from 'react-i18next';
 
-const Failed = ({errorTitle}) => {
+const Failed = () => {
+    const { t } = useTranslation();
+
     return (
         <div className={styles.failed}>
-            <h1 className={styles.title}>{errorTitle}</h1>
+            <h1 className={styles.title}>
+                {t('failed-title')}
+            </h1>
             <img src={oops} alt='Failed'/>
         </div>
     );

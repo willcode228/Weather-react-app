@@ -1,8 +1,9 @@
-import styles from './CurrentWeather.module.scss';
-import { ReactComponent as CloudIcon } from '../../../assets/icons/cloud.svg';
-import {ReactComponent as HumidityIcon} from '../../../assets/icons/humidity.svg';
-import FormatDate from './Date/Date';
+import PropTypes from 'prop-types';
 import unit from '../../../Hoc/unit';
+import FormatDate from './Date/Date';
+import styles from './CurrentWeather.module.scss';
+import { ReactComponent as CloudIcon } from '../../../Assets/icons/cloud.svg';
+import {ReactComponent as HumidityIcon} from '../../../Assets/icons/humidity.svg';
 
 const CurrentWeather = ({state, language, unit}) => {
     const imgURL = process.env.REACT_APP_ICONS_URL;
@@ -12,7 +13,7 @@ const CurrentWeather = ({state, language, unit}) => {
 
             <img className={styles.currentWeather__img} 
                 src={`${imgURL}${state.weather[0].icon}@4x.png`} 
-                alt="weather situation icon" />
+                alt='weather situation icon' />
 
             <h1 className={styles.temp}>
                 {Math.round(state.feels_like)}
@@ -37,6 +38,12 @@ const CurrentWeather = ({state, language, unit}) => {
 
         </div>
     );
+}
+
+CurrentWeather.propTypes = {
+    state: PropTypes.object,
+    language: PropTypes.string,
+    unit: PropTypes.string
 }
 
 export default unit(CurrentWeather);

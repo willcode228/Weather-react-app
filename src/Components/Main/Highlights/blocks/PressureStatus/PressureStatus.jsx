@@ -1,8 +1,8 @@
+import '../../../../../Utils/i18next';
 import main from '../Highlight.module.scss';
+import { useTranslation } from 'react-i18next';
 import styles from './PressureStatus.module.scss';
 
-import { useTranslation } from 'react-i18next';
-import '../../../../../Utils/i18next';
 
 
 const PressureStatus = ({pressure}) => {

@@ -1,8 +1,8 @@
 import axios from 'axios';
+import getCoords from '../Utils/coords';
 import { useEffect, useState } from 'react';
 import Failed from '../Components/Failed/Failed';
 import Loading from '../Components/Loading/Loading';
-import getCoords from '../Utils/coords';
 
 const WEATHER_URL = process.env.REACT_APP_API_WEATHER_URL,
     WEATHER_TOKEN = process.env.REACT_APP_API_WEATHER_KEY,
@@ -14,72 +14,64 @@ const getData = (Component) => {
 
         let [isFetching, setIsFetching] = useState(true);
 
-        let [address, setAddress] = useState('');
+        let [address, setAddress] = useState(null);
         let [language, setLanguage] = useState('en');
         let [unit, setUnit] = useState('metric');
 
         let [data, setData] = useState(null);
 
-        //fetching from localStorage language and unit data
-        const storageDataSynch = (flag) => {
-            const languageStorage = localStorage.getItem('i18nextLng');
-            if (!flag && languageStorage) {
-                setLanguage(languageStorage);
-            }
-
-            const unitStorage = localStorage.getItem('unit');
-            if (!flag && unitStorage) {
-                setUnit(unitStorage);
-            }
-        }
-
         //fetching from api address data
         useEffect(() => {
             let cleanupFunction = false;
 
-            if(!cleanupFunction) {
-                getCoords()
-                    .then(({lat, lon, error}) => {
-                        storageDataSynch(cleanupFunction);
-                        return error 
-                                ? null 
-                                : axios.get(`${PLACE_URL}&lat=${lat}&lon=${lon}&accept-language=${language}`, {
-                                    mode: 'cors',
-                                    credentials: 'include'
-                                });
-                    })
-                    .then((response) => {
-                        if(response) {
-                            if(response.status !== 200) console.log('blocked');
+            const addressData = (lon, lat, error) => {
+                if(error) {
+                    return;
+                }
 
-                            setAddress(`${response.data.address.city || response.data.address.village}, 
-                                        ${response.data.address.country}`);
+                axios
+                    .get(`${PLACE_URL}&lat=${lat}&lon=${lon}&accept-language=${language}`)
+                    .then((response) => {
+                        if(response.status === 200 && !cleanupFunction){
+                            setAddress({
+                                village: response.data.address.village,
+                                city: response.data.address.city,
+                                country: response.data.address.country
+                            });
                         }
-                    })
+                    });
             }
 
+            getCoords(addressData);
+
             return () => cleanupFunction = true;
-        }, [language]);
+        }, [language])
 
         //fetching from api weather data
         useEffect(() => {
             let cleanupFunction = false;
-            storageDataSynch(cleanupFunction);
 
-            if(!cleanupFunction) {
-                getCoords()
-                    .then(({lat, lon, error, errorType}) => {
-                        storageDataSynch(cleanupFunction);
-                        return error 
-                            ? null 
-                            : axios.get(`${WEATHER_URL}&lat=${lat}&lon=${lon}&units=${unit}&lang=${language}&appid=${WEATHER_TOKEN}`);
-                    })
-                    .then((response) => {
-                        if(response) {
+            const weatherData = (lon, lat, error) => {
+                if(error) {
+                    setIsFetching(false);
+                    return
+                }
+
+                axios
+                    .get(`${WEATHER_URL}&lat=${lat}&lon=${lon}&units=${unit}&lang=${language}&appid=${WEATHER_TOKEN}`)
+                    .then(response => {
+                        if(response.status === 200 && !cleanupFunction){ 
                             setData(response.data);
                         }
                         setIsFetching(false);
                     });
+            }
+            
+            getCoords(weatherData);
+
+            const languageStorage = localStorage.getItem('i18nextLng');
+            if(!cleanupFunction && languageStorage && language !== languageStorage) {
+                setLanguage(languageStorage);
             }
 
             return () => cleanupFunction = true;
@@ -91,7 +83,7 @@ const getData = (Component) => {
         }
 
         if (!data) {
-            return <Failed errorTitle={'Oops...We can\'t find you, sorry((('}/>
+            return <Failed />
         }
 
         return (

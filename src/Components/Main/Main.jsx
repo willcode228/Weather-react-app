@@ -1,6 +1,6 @@
+import Navbar from './Navbar/Navbar';
 import styles from './Main.module.scss';
-import Navbar from "./Navbar/Navbar";
-import Weekday from "./Weekday/Weekday";
+import Weekday from './Weekday/Weekday';
 import consumer from '../../Hoc/contextConsumer';
 import Highlights from './Highlights/Highlights';
 

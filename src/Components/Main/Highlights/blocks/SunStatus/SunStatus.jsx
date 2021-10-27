@@ -1,10 +1,10 @@
+import '../../../../../Utils/i18next';
 import main from '../Highlight.module.scss';
 import styles from './SunStatus.module.scss';
-import sunriseIcon from '../../../../../assets/icons/sunrise.png'
-import sunsetIcon from '../../../../../assets/icons/sunset.png'
-
 import { useTranslation } from 'react-i18next';
-import '../../../../../Utils/i18next';
+import sunriseIcon from '../../../../../Assets/icons/sunrise.png'
+import sunsetIcon from '../../../../../Assets/icons/sunset.png'
+
 
 
 const SunStatus = ({sunrise, sunset, language}) => {

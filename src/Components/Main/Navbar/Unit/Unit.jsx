@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import styles from './Unit.module.scss';
-import UnitBtn from "./UnitBtn/UnitBtn";
+import UnitBtn from './UnitBtn/UnitBtn';
 
 const fahrenheit = process.env.REACT_APP_FAHRENHEIT,
     celsius = process.env.REACT_APP_CELSIUS;
@@ -20,6 +21,11 @@ const Unit = ({unit, setUnit}) => {
             
         </div>
     )
+}
+
+Unit.propTypes = {
+    unit: PropTypes.string,
+    setUnit: PropTypes.func
 }
 
 export default Unit;

@@ -1,6 +1,6 @@
-import Language from './Language/Language';
-import styles from './Navbar.module.scss';
 import Unit from './Unit/Unit';
+import styles from './Navbar.module.scss';
+import Language from './Language/Language';
 
 const Navbar = ({state}) => {
     return (    

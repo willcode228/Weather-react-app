@@ -1,6 +1,7 @@
-import styles from './Weekday.module.scss';
 import Day from './Day/Day';
+import PropTypes from 'prop-types';
 import unit from '../../../Hoc/unit';
+import styles from './Weekday.module.scss';
 
 const Weekday = ({state, language, unit}) => {
     return (
@@ -12,6 +13,12 @@ const Weekday = ({state, language, unit}) => {
             }
         </div>
     );
+}
+
+Weekday.propsTypes = {
+    state: PropTypes.object,
+    language: PropTypes.string,
+    unit: PropTypes.string,
 }
 
 export default unit(Weekday);

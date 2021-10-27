@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './Language.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const Language = ({language, setLanguage}) => {
 
@@ -24,6 +25,11 @@ const Language = ({language, setLanguage}) => {
             
         </select>
     );
+}
+
+Language.propTypes = {
+    unit: PropTypes.string,
+    setUnit: PropTypes.func
 }
 
 export default Language
