@@ -23,5 +23,10 @@
         font-weight: 500;
         font-size: 30px;
     }
+}
 
+@media screen and (max-width: 390px) {
+    .highlight{
+        flex: 0 0 100%;
+    }
 }

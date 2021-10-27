@@ -12,6 +12,15 @@
     border-bottom-left-radius: 28px;
 }
 
+@media screen and (max-width: 992px) {
+    .aside{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .aside{
         min-width: 100%;

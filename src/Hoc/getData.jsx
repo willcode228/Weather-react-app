@@ -12,7 +12,7 @@ const getData = (Component) => {
 
     const DataContainer = (props) => {
 
-        let [isFetching, setIsFetching] = useState(true);
+        let [isFetching, setIsFetching] = useState(false);
 
         let [address, setAddress] = useState(null);
         let [language, setLanguage] = useState('en');
@@ -20,9 +20,24 @@ const getData = (Component) => {
 
         let [data, setData] = useState(null);
 
+        //synchronies data with local storage and start isFetching(Loader)
+        useEffect(() => {
+            let cleanupFunction = false;
+
+            setIsFetching(true);
+
+            const languageStorage = localStorage.getItem('i18nextLng');
+            if(!cleanupFunction && languageStorage && language !== languageStorage) {
+                setLanguage(languageStorage);
+            }
+
+            return () => cleanupFunction = true;
+        }, []);
+
         //fetching from api address data
         useEffect(() => {
             let cleanupFunction = false;
+            
 
             const addressData = (lon, lat, error) => {
                 if(error) {
@@ -45,7 +60,7 @@ const getData = (Component) => {
             getCoords(addressData);
 
             return () => cleanupFunction = true;
-        }, [language])
+        }, [language]);
 
         //fetching from api weather data
         useEffect(() => {
@@ -56,39 +71,33 @@ const getData = (Component) => {
                     setIsFetching(false);
                     return
                 }
-
+                
                 axios
                     .get(`${WEATHER_URL}&lat=${lat}&lon=${lon}&units=${unit}&lang=${language}&appid=${WEATHER_TOKEN}`)
                     .then(response => {
-                        if(response.status === 200 && !cleanupFunction){ 
-                            setData(response.data);
+
+                        if(response.status === 200 && !cleanupFunction) {
+                            setData(response.data)
                         }
+                        
                         setIsFetching(false);
                     });
             }
-            
-            getCoords(weatherData);
 
-            const languageStorage = localStorage.getItem('i18nextLng');
-            if(!cleanupFunction && languageStorage && language !== languageStorage) {
-                setLanguage(languageStorage);
-            }
+            getCoords(weatherData);
 
             return () => cleanupFunction = true;
         }, [language, unit]);
 
-
-        if (isFetching) {
-            return <Loading />
-        }
-
-        if (!data) {
-            return <Failed />
-        }
-
         return (
-            <Component {...props}
-                state={{ data, language, unit, address, setLanguage, setUnit}} />
+            <>
+                <Loading isFetching={isFetching}/>
+                {
+                    !data
+                        ? <Failed />
+                        : <Component {...props} state={{ data, language, unit, address, setLanguage, setUnit}} />
+                }
+            </>
         );
     }
 
