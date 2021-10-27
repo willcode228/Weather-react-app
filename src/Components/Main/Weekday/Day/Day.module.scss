@@ -41,6 +41,12 @@
     }
 }
 
+@media screen and (max-width: 440px) {
+    .day{
+        width: 45%;
+    }
+}
+
 @media screen and (max-width: 390px) {
     .day{
         width: 100%;
