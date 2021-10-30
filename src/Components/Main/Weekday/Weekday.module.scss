@@ -5,3 +5,9 @@
     gap: 10px;
     flex-wrap: wrap;
 }
+
+@supports not(gap: 10px) {
+    .daily{
+        margin: 10px;
+    }
+}

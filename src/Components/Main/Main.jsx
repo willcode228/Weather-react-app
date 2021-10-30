@@ -14,6 +14,7 @@ const Main = ({state}) => {
                     unit={state.unit}/>
 
             <Highlights state={state.data.daily.slice(0,1)[0]}
+                        language={state.language}
                         unit={state.unit}/>
         </div>
     );

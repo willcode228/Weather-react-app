@@ -6,8 +6,7 @@ import WindStatus from './blocks/WindStatus/WindStatus';
 import PressureStatus from './blocks/PressureStatus/PressureStatus';
 
 
-const Highlights = ({state, unit}) => {
-
+const Highlights = ({state, language, unit}) => {
     const { t } = useTranslation();
 
     return (
@@ -25,7 +24,7 @@ const Highlights = ({state, unit}) => {
 
                 <SunStatus sunrise={state.sunrise}
                             sunset={state.sunset}
-                            language={state.language}/>
+                            language={language}/>
 
                 <PressureStatus pressure={state.pressure}/>
 

@@ -42,6 +42,9 @@
 
 @media screen and (max-width: 567px) {
     .failed{
+        .title{
+            width: 100%;
+        }
         flex-direction: column;
         img{
             margin-top: 30px;
