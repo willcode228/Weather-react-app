@@ -13,14 +13,5 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
-        gap: 20px;
-    }
-}
-
-@supports not(gap: 20px) {
-    .highlight__box{
-        div {
-            margin: 20px;
-        }
     }
 }

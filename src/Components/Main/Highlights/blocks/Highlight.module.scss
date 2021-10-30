@@ -1,6 +1,7 @@
 @import '../../../../Variables.scss';
 
 .highlight{
+    margin: 10px;
     flex: 1 0 30%;
     min-height: 235px;
     background: $white;
@@ -9,6 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
     &__title{
         color: #C3C3C3;
         font-weight: 400;
